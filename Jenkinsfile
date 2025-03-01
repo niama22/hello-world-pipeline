@@ -22,6 +22,9 @@ pipeline {
                 sh 'mvn test'
             }
         }
+tools {
+    git 'Git'
+}
 
         stage('Deploy') {
             steps {
