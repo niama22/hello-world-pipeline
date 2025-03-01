@@ -24,7 +24,8 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo '🚀 Déploiement de l'application...'
+                echo "Deploiement de l'application..."
+
                 sh 'java -jar target/*.jar'
             }
         }
