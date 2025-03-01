@@ -12,7 +12,7 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String sayHello() {
-        return "Hello!";
+        return "Hello niama!";
     }
 
     // Endpoint pour éviter l'erreur Whitelabel si quelqu'un va sur /
