@@ -15,6 +15,10 @@ public class HelloController {
 
     private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
 
+    public HelloController() {
+        logger.info("🚀 [LOG] - HelloController initialisé !");
+    }
+
     @GetMapping("/hello")
     public String sayHello() {
         logger.info("✅ [LOG] - Endpoint /hello appelé !");
