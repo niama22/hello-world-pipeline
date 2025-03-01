@@ -27,29 +27,27 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                echo '🚀 Déploiement de l\'application...'
-                script {
-                    def jarFile = sh(script: "ls target/*.jar", returnStdout: true).trim()
-                    if (jarFile) {
-                        echo "✅ [LOG] - Fichier JAR trouvé : ${jarFile}"
-                        sh "java -jar ${jarFile} &"
-                        echo "✅ [LOG] - Application démarrée avec succès !"
-                    } else {
-                        error "🚨 [LOG] - Aucun fichier .jar trouvé dans le dossier target/"
-                    }
-                }
-            }
-        }
+     stage('Deploy') {
+         steps {
+             echo '🚀 Déploiement de l\'application...'
+             script {
+                 sh 'docker stop my-app || true' // Arrête l'ancien conteneur s'il existe
+                 sh 'docker rm my-app || true'   // Supprime l'ancien conteneur
+                 sh 'docker run -d --name my-app -p 8080:8080 hello-world-app:latest'
+                 echo "✅ [LOG] - Application déployée dans Docker !"
+             }
+         }
+     }
 
-        stage('Afficher Logs') {
-            steps {
-                echo '📜 Récupération des logs de l\'application...'
-                sh 'docker logs my-app || echo "🚨 Aucun log trouvé pour my-app"'
-                echo "✅ [LOG] - Affichage des logs terminé !"
-            }
-        }
-    }
+
+      stage('Afficher Logs') {
+          steps {
+              echo '📜 Récupération des logs de l\'application...'
+              sh 'tail -n 50 nohup.out || echo "🚨 Aucun log trouvé pour l\'application"'
+              echo "✅ [LOG] - Affichage des logs terminé !"
+          }
+      }
+
 
     post {
         success {
