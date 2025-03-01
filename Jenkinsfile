@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        git 'Git'  // Assurez-vous que Git est bien configuré dans Jenkins
-        maven 'Maven' // Assurez-vous que Maven est bien configuré dans Jenkins
-    }
-
     stages {
         stage('Checkout') {
             steps {
