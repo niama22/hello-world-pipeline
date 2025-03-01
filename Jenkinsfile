@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch 'main', url 'httpsgithub.comniama22hello-world-pipeline.git'
+                git branch: 'main', url: 'https://github.com/niama22/hello-world-pipeline.git'
             }
         }
 
@@ -25,7 +25,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo '🚀 Déploiement de l'application...'
-                sh 'java -jar target.jar'
+                sh 'java -jar target/*.jar'
             }
         }
     }
