@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven' // Assurez-vous que Maven est bien configuré dans Jenkins
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -30,8 +26,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo '🚀 Déploiement de l\'application...'
-
-                // Vérification si le fichier .jar existe
                 script {
                     def jarFile = sh(script: "ls target/*.jar", returnStdout: true).trim()
                     if (jarFile) {
